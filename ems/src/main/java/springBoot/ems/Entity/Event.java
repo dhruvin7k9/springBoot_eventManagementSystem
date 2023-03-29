@@ -27,7 +27,7 @@ public class Event {
 	private String eventDescription;
 	
 	@Column
-	private Timestamp eventRegDue;
+	private Localdate eventRegDue;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "cId")
