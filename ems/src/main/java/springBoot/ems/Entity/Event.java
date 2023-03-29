@@ -1,6 +1,6 @@
 package springBoot.ems.Entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -43,7 +43,7 @@ public class Event {
 		super();
 	}
 
-	public Event(String eventName, String eventDescription, Timestamp eventRegDue, Club club) {
+	public Event(String eventName, String eventDescription, LocalDate eventRegDue, Club club) {
 		super();
 		this.eventName = eventName;
 		this.eventDescription = eventDescription;
@@ -51,7 +51,7 @@ public class Event {
 		this.club = club;
 	}
 	
-	public Event(int eId, String eventName, String eventDescription, Timestamp eventRegDue, Club club) {
+	public Event(int eId, String eventName, String eventDescription, LocalDate eventRegDue, Club club) {
 		super();
 		this.eId = eId;
 		this.eventName = eventName;
@@ -84,11 +84,11 @@ public class Event {
 		this.eventDescription = eventDescription;
 	}
 
-	public Timestamp getEventRegDue() {
+	public LocalDate getEventRegDue() {
 		return eventRegDue;
 	}
 
-	public void setEventRegDue(Timestamp eventRegDue) {
+	public void setEventRegDue(LocalDate eventRegDue) {
 		this.eventRegDue = eventRegDue;
 	}
 
