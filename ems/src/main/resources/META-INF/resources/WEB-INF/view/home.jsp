@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,7 @@
 <title>HOME</title>
 </head>
 <body>
-	str : ${str}
+<a href="club/signin">club login</a>
+<a href="student/signin">student login</a>
 </body>
 </html>

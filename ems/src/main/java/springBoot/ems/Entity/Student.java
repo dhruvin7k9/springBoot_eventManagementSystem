@@ -15,31 +15,30 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sId;
-	
-	@Column
+
+	@Column(unique = true)
 	private String studentId;
-	
+
 	@Column
 	private String studentName;
-	
+
 	@Column
 	private String studentBranch;
-	
+
 	@Column
 	private int studentSem;
-	
+
 	@Column
 	private String studentPassword;
-	
+
 	@ManyToMany(mappedBy = "students", cascade = CascadeType.REFRESH)
 	private List<Event> events;
 
 	public Student() {
 		super();
 	}
-	
-	public Student(String studentId, String studentName, String studentBranch, int studentSem,
-			String studentPassword) {
+
+	public Student(String studentId, String studentName, String studentBranch, int studentSem, String studentPassword) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
@@ -47,7 +46,7 @@ public class Student {
 		this.studentSem = studentSem;
 		this.studentPassword = studentPassword;
 	}
-	
+
 	public Student(int sId, String studentId, String studentName, String studentBranch, int studentSem,
 			String studentPassword) {
 		super();
@@ -105,6 +104,14 @@ public class Student {
 
 	public void setStudentPassword(String studentPassword) {
 		this.studentPassword = studentPassword;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	@Override

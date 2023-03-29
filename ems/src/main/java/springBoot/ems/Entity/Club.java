@@ -15,20 +15,20 @@ public class Club {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cId;
-	
+
 	@Column
 	private String clubName;
-	
+
 	@Column
 	private String clubPassword;
-	
+
 	@OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
 	private List<Event> events;
 
 	public Club() {
 		super();
 	}
-	
+
 	public Club(String clubName, String clubPassword) {
 		super();
 		this.clubName = clubName;
@@ -64,6 +64,14 @@ public class Club {
 
 	public void setClubPassword(String clubPassword) {
 		this.clubPassword = clubPassword;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	@Override

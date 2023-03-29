@@ -2,7 +2,6 @@ package springBoot.ems.Entity;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,24 +18,22 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eId;
-	
+
 	@Column
 	private String eventName;
-	
+
 	@Column
 	private String eventDescription;
-	
+
 	@Column
-	private Localdate eventRegDue;
-	
+	private LocalDate eventRegDue;
+
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "cId")
 	private Club club;
-	
+
 	@ManyToMany(cascade = CascadeType.REFRESH)
-	@JoinTable(name = "Participation", 
-				joinColumns = @JoinColumn(name = "eId", referencedColumnName = "eId"),
-				inverseJoinColumns = @JoinColumn(name ="sId", referencedColumnName = "sId"))
+	@JoinTable(name = "Participation", joinColumns = @JoinColumn(name = "eId", referencedColumnName = "eId"), inverseJoinColumns = @JoinColumn(name = "sId", referencedColumnName = "sId"))
 	private List<Student> students;
 
 	public Event() {
@@ -50,7 +47,7 @@ public class Event {
 		this.eventRegDue = eventRegDue;
 		this.club = club;
 	}
-	
+
 	public Event(int eId, String eventName, String eventDescription, LocalDate eventRegDue, Club club) {
 		super();
 		this.eId = eId;
@@ -98,6 +95,14 @@ public class Event {
 
 	public void setClub(Club club) {
 		this.club = club;
+	}
+
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 
 	@Override
