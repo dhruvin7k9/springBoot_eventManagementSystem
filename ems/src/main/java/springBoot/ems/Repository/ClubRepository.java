@@ -11,4 +11,5 @@ import springBoot.ems.Entity.Club;
 @Repository
 public interface ClubRepository extends JpaRepository<Club, Integer> {
 	public List<Club> findByClubNameAndClubPassword(String clubName, String clubPassword);
+	public List<Club> findByClubName(String clubName);
 }

@@ -20,7 +20,7 @@ public class ClubController {
 		// TODO Auto-generated constructor stub
 		this.clubService = clubService;
 	}
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
 	public String signIn() {
 		return "clubSignIn";
 	}
@@ -34,15 +34,21 @@ public class ClubController {
 		return "clubSignIn";
 	}
 	
-	@RequestMapping(value = "/createClubForm")
-	public String createClubForm() {
-		return "createClubForm";
+	@RequestMapping(value = "/registerClub")
+	public String registerClub() {
+		return "registerClub";
 	}
 	
 	@RequestMapping(value = "/createClub", method = RequestMethod.POST)
-	public String createClub(@RequestParam String clubName, @RequestParam String clubPassword) {
-		clubService.addClub(new Club(clubName, clubPassword));
-		return "clubSignIn";
+	public String createClub(@RequestParam String clubName, @RequestParam String clubPassword, ModelMap modelMap) {
+		Club newClub = new Club(clubName, clubPassword);
+		if(!clubService.findByClubName(clubName)) {
+			clubService.addClub(newClub);
+			modelMap.addAttribute("msg", "sign in with the registered credentials");
+			return "clubSignIn";
+		}
+		modelMap.addAttribute("msg", "the club name is already registered\nplease change the club name");
+		return "registerClub";
 	}
 	
 	@RequestMapping(value = "/showClubDashboard")

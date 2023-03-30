@@ -75,5 +75,14 @@ public class StudentService {
 			return student.getEvents();
 		return null;
 	}
+	
+	public boolean validateStudent(String studentId, String studentPassword) {
+		return studentRepository.findByStudentIdAndStudentPassword(studentId, studentPassword).size() == 1;
+	}
+	
+	public boolean findByStudentId(String studentId) {
+		
+		return studentRepository.findByStudentId(studentId).size() == 1;
+	}
 
 }

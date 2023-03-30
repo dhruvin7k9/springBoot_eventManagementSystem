@@ -8,6 +8,7 @@
 <title>Club Sign In</title>
 </head>
 <body>
+	<h2>Club Sign In</h2>
 	<form action="validateClub" method="post">
 		<span> Club Name : </span> <input type="text" name="clubName" />
 		<br /> <br /> 
@@ -18,6 +19,6 @@
     <c:if test="${not empty msg}">
     <h5 style="color:red;"> ${msg} </h5>
     </c:if>
-	<a href="createClubForm">create a club</a>
+	<a href="registerClub">create a club</a>
 </body>
 </html>

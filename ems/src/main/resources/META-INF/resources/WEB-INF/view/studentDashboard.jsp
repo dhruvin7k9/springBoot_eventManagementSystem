@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Club Dashboard</title>
+<title>Student Dashboard</title>
 </head>
 <body>
-<h1>club Dashboard</h1>
+	student dashboard
 </body>
 </html>

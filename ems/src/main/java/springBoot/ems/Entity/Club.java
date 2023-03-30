@@ -16,7 +16,7 @@ public class Club {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cId;
 
-	@Column
+	@Column(unique = true)
 	private String clubName;
 
 	@Column

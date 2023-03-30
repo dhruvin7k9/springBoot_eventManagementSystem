@@ -70,4 +70,8 @@ public class ClubService {
 		return clubRepository.findByClubNameAndClubPassword(clubName, clubPassword).size() == 1;
 	}
 	
+	public boolean findByClubName(String clubName) {
+		return clubRepository.findByClubName(clubName).size() == 1;
+	}
+	
 }
