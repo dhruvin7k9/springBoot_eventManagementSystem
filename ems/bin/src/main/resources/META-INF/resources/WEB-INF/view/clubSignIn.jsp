@@ -20,7 +20,5 @@
     <h5 style="color:red;"> ${msg} </h5>
     </c:if>
 	<a href="registerClub">create a club</a>
-	<br/>
-	<a href="/">home</a>
 </body>
 </html>

@@ -21,5 +21,7 @@
 		<h5 style="color:red;"> ${msg} </h5>
 	</c:if><br/>
 	<a href="signIn">club sign in</a>
+	<br/>
+	<a href="/">home</a>
 </body>
 </html>
