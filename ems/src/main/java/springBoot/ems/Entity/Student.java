@@ -5,9 +5,12 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -31,7 +34,8 @@ public class Student {
 	@Column
 	private String studentPassword;
 
-	@ManyToMany(mappedBy = "students", cascade = CascadeType.REFRESH)
+	@ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
+	@JoinTable(name = "Participation", joinColumns = @JoinColumn(name = "sId", referencedColumnName = "sId"), inverseJoinColumns = @JoinColumn(name = "eId", referencedColumnName = "eId"))
 	private List<Event> events;
 
 	public Student() {

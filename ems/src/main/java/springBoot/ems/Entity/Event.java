@@ -32,8 +32,7 @@ public class Event {
 	@JoinColumn(name = "cId")
 	private Club club;
 
-	@ManyToMany(cascade = CascadeType.REFRESH)
-	@JoinTable(name = "Participation", joinColumns = @JoinColumn(name = "eId", referencedColumnName = "eId"), inverseJoinColumns = @JoinColumn(name = "sId", referencedColumnName = "sId"))
+	@ManyToMany(mappedBy = "events", cascade = CascadeType.REFRESH)
 	private List<Student> students;
 
 	public Event() {
@@ -104,7 +103,7 @@ public class Event {
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Event [eId=" + eId + ", eventName=" + eventName + ", eventDescription=" + eventDescription

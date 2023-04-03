@@ -26,6 +26,10 @@ public class EmsController {
 	public String experiments(ModelMap model) {
 		
 		model.addAttribute("str", "home page");
+//		int sId = 1;
+//		String studentName = "student";
+//		studentService.addStudent(new Student(studentName, studentName, studentName, sId, studentName));
+//		model.addAttribute("str", "home page");
 		return "home";
 	}
 

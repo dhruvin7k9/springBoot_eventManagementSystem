@@ -1,7 +1,6 @@
 package springBoot.ems.Service;
 
 import java.util.List;
-import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,3 +98,5 @@ public class ClubService {
 		return eventRepository.findByeId(eId);
 	}	
 }
+
+
