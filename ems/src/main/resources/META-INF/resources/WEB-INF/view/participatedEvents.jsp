@@ -29,7 +29,7 @@
 </c:forEach>
 <c:forEach items="${expiredEvents}" var="e">
  <tr>
- <td>${e.eventName} </td>
+ <td>${e.eventName}</td>
  <td>${e.eventDescription}</td>
  <td style="color:green;">event participated successfully</td>
  </tr>
