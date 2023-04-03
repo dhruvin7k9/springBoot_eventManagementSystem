@@ -74,4 +74,5 @@ public class ClubService {
 		return clubRepository.findByClubName(clubName).size() == 1;
 	}
 	
+	
 }

@@ -8,7 +8,7 @@
 <title>HOME</title>
 </head>
 <body>
-<a href="club/signIn">club login</a><br>
+<a href="club/signIn">club login</a>
 <a href="student/signIn">student login</a>
 </body>
 </html>

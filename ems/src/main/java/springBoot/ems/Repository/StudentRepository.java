@@ -11,4 +11,5 @@ import springBoot.ems.Entity.Student;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 	public List<Student> findByStudentIdAndStudentPassword(String studentId, String studentPassword);
 	public List<Student> findByStudentId(String studentId);
+	public List<Student> findBysId(int sId);
 }

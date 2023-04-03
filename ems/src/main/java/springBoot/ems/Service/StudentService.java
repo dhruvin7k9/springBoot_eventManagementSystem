@@ -41,13 +41,7 @@ public class StudentService {
 	public void cancelParticipation(int sId, Event event) {
 		Student student = findStudentById(sId);
 		if (student != null) {
-			List<Event> events = student.getEvents();
-			events.forEach((e) -> {
-				if (e.geteId() == event.geteId()) {
-					events.remove(e);
-				}
-			});
-			student.setEvents(events);
+			student.getEvents().remove(event);
 			studentRepository.save(student);
 		}
 	}
@@ -81,8 +75,14 @@ public class StudentService {
 	}
 	
 	public boolean findByStudentId(String studentId) {
-		
 		return studentRepository.findByStudentId(studentId).size() == 1;
 	}
 
+	public Student getStudentByStudentId(String studentId) {
+		return studentRepository.findByStudentId(studentId).get(0);
+	}
+	
+	public Student getStudentBysId(int sId) {
+		return studentRepository.findBysId(sId).get(0);
+	}
 }
