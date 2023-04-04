@@ -1,6 +1,7 @@
 package springBoot.ems.Controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class ClubController {
 	
 	@Autowired
 	public ClubController(ClubService clubService) {
-		// TODO Auto-generated constructor stub
 		this.clubService = clubService;
 	}
 	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
@@ -35,7 +35,7 @@ public class ClubController {
 	@RequestMapping(value = "/validateClub", method = RequestMethod.POST)
 	public String validateClub(@RequestParam String clubName, @RequestParam String clubPassword, ModelMap modelMap, RedirectAttributes redirectAttributes) {
 		if(clubService.validateClub(clubName,clubPassword)) {
-			redirectAttributes.addAttribute("clubName", clubName); // dk
+			redirectAttributes.addAttribute("clubName", clubName);
 			return "redirect:showClubDashboard";
 		}
 		modelMap.addAttribute("msg", "credentials are wrong or club does not exist");
@@ -60,22 +60,34 @@ public class ClubController {
 	}
 	
 	@RequestMapping(value = "/showClubDashboard")
-	public String showClubDashboard(@RequestParam("clubName") String clubName, ModelMap modelMap) { // dk
-		modelMap.addAttribute("clubName", clubName); // dk
+	public String showClubDashboard(@RequestParam("clubName") String clubName, ModelMap modelMap) {
+		modelMap.addAttribute("clubName", clubName);
 		List<Event> events = clubService.getEventsByClubName(clubName);
+		List<Event> liveEvents = new ArrayList<Event>();
+		List<Event> expiredEvents = new ArrayList<Event>();
+
 		String status = "full";
-		modelMap.addAttribute("status", status);
 		if (events.isEmpty() == true)
 			status = "empty";
+
+		LocalDate today = LocalDate.now();
+		for (Event e : events) {
+			if (e.getEventRegDue().compareTo(today) >= 0) 
+				liveEvents.add(e);
+			else 
+				expiredEvents.add(e);
+		}
+
 		modelMap.addAttribute("status", status);
-		modelMap.addAttribute("events", events); // dk
+		modelMap.addAttribute("liveEvents", liveEvents);
+		modelMap.addAttribute("expiredEvents", expiredEvents);
 		
 		return "clubDashboard";
 	}
-	// dk
+	
 	@RequestMapping(value = "/addEvent")
-	public String addEvent(@RequestParam("clubName") String clubName, ModelMap modelMap) { // dk
-		modelMap.addAttribute("clubName", clubName); // dk
+	public String addEvent(@RequestParam("clubName") String clubName, ModelMap modelMap) {
+		modelMap.addAttribute("clubName", clubName);
 		return "addEvent";
 	}
 	
@@ -86,12 +98,43 @@ public class ClubController {
 			@RequestParam(value = "eventRegDue", required = true) 
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) 
     		LocalDate eventRegDue,
-			ModelMap modelMap, RedirectAttributes redirectAttributes) { // dk
+			ModelMap modelMap, RedirectAttributes redirectAttributes) {
 		
 		Club c = clubService.findByClubName(clubName, true);
 		Event e = new Event(eventName, eventDescription, eventRegDue, c);
 		clubService.addEvent(c.getcId(), e);
-		redirectAttributes.addAttribute("clubName", clubName); // dk
+
+		redirectAttributes.addAttribute("clubName", clubName);
+		return "redirect:showClubDashboard";
+	}
+
+	@RequestMapping(value = "/updateEvent")
+	public String updateEvent(@RequestParam("clubName") String clubName, 
+								@RequestParam("eNm") String eventName,
+								ModelMap modelMap) {
+		modelMap.addAttribute("clubName", clubName);
+		modelMap.addAttribute("eventName", eventName);
+		return "updateEvent";
+	}
+	@RequestMapping(value = "/processUpdatedEvent", method = RequestMethod.POST)
+	public String processUpdatedEvent(@RequestParam("clubName") String clubName, 
+			@RequestParam(value = "oldEventName", required = true) String oldEventName,
+			@RequestParam(value = "eventName", required = true) String eventName,
+			@RequestParam(value = "eventDescription", required = true) String eventDescription,
+			@RequestParam(value = "eventRegDue", required = true) 
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) 
+    		LocalDate eventRegDue,
+			ModelMap modelMap, RedirectAttributes redirectAttributes) {
+		
+		Club c = clubService.findByClubName(clubName, true);
+		
+		Event e = clubService.getEventByEventName(oldEventName);
+		e.setEventName(eventName);
+		e.setEventDescription(eventDescription);
+		e.setEventRegDue(eventRegDue);
+		clubService.updateEvent(c.getcId(), e);
+		
+		redirectAttributes.addAttribute("clubName", clubName);
 		return "redirect:showClubDashboard";
 	}
 	
@@ -111,7 +154,7 @@ public class ClubController {
 		if (students.isEmpty() == true)
 			status = "empty";
 		modelMap.addAttribute("status", status);
-		modelMap.addAttribute("students", students); // dk
+		modelMap.addAttribute("students", students);
 		return "eventDetails";
 	}
 	
@@ -122,7 +165,7 @@ public class ClubController {
 		Event e = clubService.getEventByeId(eId);
 		Club c = clubService.findByClubName(clubName, true);
 		clubService.removeEvent(c.getcId(), e);
-		redirectAttributes.addAttribute("clubName", clubName); // dk
+		redirectAttributes.addAttribute("clubName", clubName);
 		return "redirect:showClubDashboard";
 	}
 }

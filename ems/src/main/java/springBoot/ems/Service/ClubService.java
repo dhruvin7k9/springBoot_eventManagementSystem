@@ -1,5 +1,6 @@
 package springBoot.ems.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,6 @@ public class ClubService {
 		this.clubRepository = clubRepository;
 		this.eventRepository = eventRepository;
 	}
-	
-//	@Autowired // setter based
-//	public void EventService(EventRepository eventRepository) {
-//		this.eventRepository = eventRepository;
-//	}
 
 	public void addClub(Club club) {
 		clubRepository.save(club);
@@ -50,16 +46,7 @@ public class ClubService {
 	public void removeEvent(int cId, Event event) {
 		Club club = findClubById(cId);
 		if (club != null) {
-//			List<Event> events = club.getEvents();
-//			ListIterator<Event> li = events.listIterator();
-//			while (li.hasNext()) {
-//				if (li.next().geteId() == event.geteId()) {
-//					li.remove();
-//				}
-//			}
 			eventRepository.delete(event);
-//			club.setEvents(events);
-//			clubRepository.save(club);
 		}
 	}
 
@@ -90,13 +77,28 @@ public class ClubService {
 	
 	public List<Event> getEventsByClubName(String clubname) {
 		List<Club> c = clubRepository.findByClubName(clubname);
-		int CId = c.get(0).getcId(); // as unique name per club so only one object
-		return eventRepository.findBycId(CId);
+		int cId = c.get(0).getcId(); // as unique name per club so only one object
+		List<Event> allEvents = eventRepository.findAll();
+		List<Event> clubEvents = new ArrayList<Event>();
+		for (Event e : allEvents) {
+			if (e.getClub().getcId() == cId)
+				clubEvents.add(e);
+		}
+		return clubEvents;
 	}
 
 	public Event getEventByeId(int eId) {
 		return eventRepository.findByeId(eId);
-	}	
+	}
+
+	public Event getEventByEventName(String eventName) {
+		return eventRepository.findByEventName(eventName);
+	}
+
+    public void updateEvent(int cId, Event e) {
+		Club club = findClubById(cId);
+		if (club != null) {
+			eventRepository.save(e);
+		}
+    }
 }
-
-

@@ -14,7 +14,6 @@ public class EventService {
 	@Autowired
 	public EventService(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public List<Event> getAllEvents() {

@@ -6,21 +6,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Club Sign In</title>
+<style>
+	body {
+		font-family: 'Courier New', Courier, monospace;
+		font-size: large;
+	}
+	input[type=text], select {
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	}
+	
+	input[type=submit] {
+	  width: 100%;
+	  background-color: #4CAF50;
+	  color: white;
+	  padding: 14px 20px;
+	  margin: 8px 0;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	  font-size: medium;
+	}
+	
+	input[type=submit]:hover {
+	  background-color: #45a049;
+	}
+	
+	div {
+	  position: absolute;
+	  left: 20vw;
+	  top: 15vh;
+	  width: 50%;
+	  border-radius: 5px;
+	  background-color: #f2f2f2;
+	  padding: 20px;
+	}
+	h1,h5 {
+		position: absolute;
+		left: 2vw;
+	}
+	a {
+		position: absolute;
+		font-weight: bolder;
+		top: 40vh;
+		left: 2vw;
+	}
+</style>
 </head>
 <body>
-	<h2>Club Sign In</h2>
+	<h1>Club SignIn</h1>
+	<div>
 	<form action="validateClub" method="post">
-		<span> Club Name : </span> <input type="text" name="clubName" />
+		<span> <b> Club Name : </b></span> <input type="text" name="clubName" required/>
 		<br /> <br /> 
-		<span> Club Password : </span> 
-		<input type="password" name="clubPassword" />
+		<span><b> Club Password : </b></span> 
+		<input type="password" name="clubPassword" required/>
+		<br/> <br/>
 		<input type="submit" value="submit" />
-	</form><br/>
+	</form>
+	</div>
+	<br/>
     <c:if test="${not empty msg}">
-    <h5 style="color:red;"> ${msg} </h5>
+    <h5 style="color:red; top:7vh;">(${msg})</h5>
     </c:if>
 	<a href="registerClub">create a club</a>
 	<br/>
-	<a href="/">home</a>
+	<a style="top:45vh;" href="/">HOME</a>
 </body>
 </html>

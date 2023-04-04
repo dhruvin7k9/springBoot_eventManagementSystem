@@ -13,7 +13,6 @@ public class StudentService {
 
 	@Autowired
 	public StudentService(StudentRepository studentRepository) {
-		// TODO Auto-generated constructor stub
 		this.studentRepository = studentRepository;
 	}
 

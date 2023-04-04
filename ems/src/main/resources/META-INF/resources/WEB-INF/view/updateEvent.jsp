@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>add Event</title>
+<title>update Event</title>
 <style>
 	body {
 		font-family: 'Courier New', Courier, monospace;
@@ -38,13 +38,13 @@
 	div {
 	  position: absolute;
 	  left: 20vw;
-	  top: 15vh;
+	  top: 20vh;
 	  width: 50%;
 	  border-radius: 5px;
 	  background-color: #f2f2f2;
 	  padding: 20px;
 	}
-	h1 {
+	h1,h3 {
 		position: absolute;
 		left: 2vw;
 	}
@@ -57,17 +57,21 @@
 </style>
 </head>
 <body>
-<h1>Add Event : </h1>
+<h1>Update Event : </h1>
+<br/>
+<em><h3 style="top: 10vh;">Event name : ${eventName}</h3></em>
+<br/>
 <div>
 	<form method="POST" name="add_event"
-		action="processNewEvent?clubName=${clubName}">
-			Event name: <input name="eventName" type="text" required/> 
+		action="processUpdatedEvent?clubName=${clubName}">
+			<input name="oldEventName" value="${eventName}" type="hidden"/>
+			Event name: <input name="eventName" placeholder="${eventName}" type="text" required/> 
 			<br /> <br />
 			Event Description: <input name="eventDescription" type="text" required/> 
 			<br /> <br /> 
 			Last registration date: <input name="eventRegDue" type="datetime-local" required/> 
 			<br /> <br />
-		<input value="Add Event" type="submit" name="submit" />
+		<input value="Update Event" type="submit" name="submit" />
 	</form>
 </div>
 <a href="showClubDashboard?clubName=${clubName}">DASHBOARD</a> 

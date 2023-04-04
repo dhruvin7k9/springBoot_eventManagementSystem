@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import springBoot.ems.Entity.Event;
@@ -16,7 +15,9 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 	// expired events
 	public List<Event> findByEventRegDueLessThan(LocalDate eventRegDue);
 	
-	@Query("SELECT e FROM Event e JOIN Club c WHERE c.cId = ?1")
-	public List<Event> findBycId(int CId);
+	public List<Event> findAll();
+	
 	public Event findByeId(int eId);
+
+    public Event findByEventName(String eventName);
 }
